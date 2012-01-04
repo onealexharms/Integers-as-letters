@@ -1,7 +1,7 @@
 clear ''
 it =: '~/Development/JProjects/spreadsheet_labels/translate.ijs'
 
-now =: ''
+test =: ''
 from =: {
 length_of =: #
 ascii_characters =: a.
@@ -47,60 +47,60 @@ assertion =: dyad define
  smoutput '---'
 )
 
-verb define now
+verb define test
  test =. 'Rightmost character of column 0 is A.'
  test_character =. character_of_label_for 0
  test assertion (,'A') matches test_character
 )
  
-verb define now
+verb define test
  test =. 'Rightmost character of column 1 is B.'
  test_character =. character_of_label_for 1
  test assertion (,'B') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Rightmost character of column 26 is A.'
  test_character =. character_of_label_for 26
  test assertion (,'A') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Rightmost character of label for 701 is Z.'
  test_character =. character_of_label_for 701
  test assertion (,'Z') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Rightmost character of label for 702 is A.'
  test_character =. character_of_label_for 702
  test assertion (,'A') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Character before rightmost character of label for 27 is A.'
  test_character =. second_character_of_label_for 27
  test assertion (,'A') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Label for 25 is contains one letter-digit.'
  test assertion 1 matches length_of label_for 25
 )
 
-verb define now
+verb define test
  test =. 'Character before rightmost character of label for 52 is B.'
  test_character =. second_character_of_label_for 52
  test assertion (,'B') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Character before rightmost character of label for 26 is A.'
  test_character =. second_character_of_label_for 26
  test assertion (,'A') matches test_character
 )
 
-verb define now
+verb define test
  test =. 'Label for 701 is ZZ.' 
  test assertion ('ZZ') matches label_for 701
 )
