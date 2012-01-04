@@ -1,5 +1,5 @@
 clear ''
-it =: '~/Development/JProjects/spreadsheet_labels/translate.ijs'
+it =: '~/Development/JProjects/Integers-as-letters/translate.ijs'
 
 test =: ''
 from =: {
