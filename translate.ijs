@@ -25,7 +25,7 @@ character_of_label_for =: verb define
 )
 
 second_character_of_label_for =: verb define
-alphabets_gone_by =: <. y % 26
+alphabets_gone_by =: <. y % LENGTH_OF_ALPHABET
 if. alphabets_gone_by do. 
     character_of_label_for (alphabets_gone_by - 1)
 else.
