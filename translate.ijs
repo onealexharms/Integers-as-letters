@@ -20,7 +20,7 @@ ASCII_FOR_A =: ascii_characters get_index_of 'A'
 ALPHABET =: (ASCII_FOR_A + i.LENGTH_OF_ALPHABET) from ascii_characters
 
 label_for =: verb define
- (second_character_of_label_for y), (rightmost_character_of_label_for y)
+ (third_character_of_label_for y), (second_character_of_label_for y), (rightmost_character_of_label_for y)
 )
 
 rightmost_character_of_label_for =: verb define
@@ -32,6 +32,15 @@ second_character_of_label_for =: verb define
 alphabets_gone_by =: <. y % LENGTH_OF_ALPHABET
 if. alphabets_gone_by do. 
     rightmost_character_of_label_for (alphabets_gone_by - 1)
+else.
+    ''
+end.
+)
+
+third_character_of_label_for =: verb define
+alphabets_to_skip =: <. y % LENGTH_OF_ALPHABET^2
+if. alphabets_to_skip do. 
+    rightmost_character_of_label_for (alphabets_to_skip - 1)
 else.
     ''
 end.
@@ -50,9 +59,10 @@ matches =: dyad define
 assertion =: dyad define
  name_of_test =. x
  'result describe_result' =. y
- failure_with_description =. ('*FAILED ASSERTION*  ', describe_result) 
- smoutput '--- ', name_of_test, ' ---' 
- smoutput unbox (result from (box failure_with_description), box_of_nothing)
+ failure_details =.  (name_of_test, LF, describe_result)
+ failure_with_description =. ('*FAILED ASSERTION*  ', failure_details) 
+ report_success =. '--- ', name_of_test, ' ---' 
+ smoutput unbox (result from (box failure_with_description), box report_success)
 )
 
 smoutput clear_screen
@@ -61,11 +71,6 @@ verb define test
  verify =. 'Rightmost character of column 0 is A.'
  test_character =. rightmost_character_of_label_for 0
  verify assertion (,'A') matches test_character
-)
- 
-verb define test
- verify =. 'Bogus testing test'
- verify assertion ('A') matches ('not A')
 )
 
 verb define test
@@ -116,7 +121,16 @@ verb define test
 )
 
 verb define test
+ verify =. 'Label for 52 is BA.'
+ verify assertion ('BA') matches label_for 52
+)
+
+verb define test
  verify =. 'Label for 701 is ZZ.' 
  verify assertion ('ZZ') matches label_for 701
 )
 
+verb define test
+ verify =. 'Label for 702 is AAA.'
+ verify assertion ('AAA') matches label_for 702
+)
