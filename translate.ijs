@@ -8,6 +8,7 @@ ascii_characters =: a.
 get_index_of =: i.
 shape_of =: $
 dimensions =: length_of @ shape_of
+box =: <
 
 test_report =: smoutput
 
@@ -38,13 +39,17 @@ in_base =: dyad define
 )
 
 matches =: dyad define
- smoutput 'looking for ', (":x), ', got ', (":y)
- y -: x 
+ result =. (y -: x)
+ describe_result =. 'looking for ', (":x), ', got ', (":y)
+ (box result), (box describe_result)
 )
 
 assertion =: dyad define
- smoutput (y from ('*failed*  ',: 'succeeded ')), x 
+ name_of_test =. x
+ 'result describe_result' =. y
+ smoutput (result from (('*FAILED ASSERTION*  ', describe_result) ,: 'success ')), x 
  smoutput '---'
+
 )
 
 verb define test
@@ -53,6 +58,11 @@ verb define test
  test assertion (,'A') matches test_character
 )
  
+verb define test
+ test =. 'Bogus testing test'
+ test assertion ('A') matches ('not A')
+)
+
 verb define test
  test =. 'Rightmost character of column 1 is B.'
  test_character =. rightmost_character_of_label_for 1
