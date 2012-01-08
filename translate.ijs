@@ -16,10 +16,10 @@ ASCII_FOR_A =: ascii_characters get_index_of 'A'
 ALPHABET =: (ASCII_FOR_A + i.LENGTH_OF_ALPHABET) from ascii_characters
 
 label_for =: verb define
- (second_character_of_label_for y), (character_of_label_for y)
+ (second_character_of_label_for y), (rightmost_character_of_label_for y)
 )
 
-character_of_label_for =: verb define
+rightmost_character_of_label_for =: verb define
  last_digit =: LENGTH_OF_ALPHABET | y
  (last_digit in_base LENGTH_OF_ALPHABET) from ALPHABET 
 )
@@ -27,7 +27,7 @@ character_of_label_for =: verb define
 second_character_of_label_for =: verb define
 alphabets_gone_by =: <. y % LENGTH_OF_ALPHABET
 if. alphabets_gone_by do. 
-    character_of_label_for (alphabets_gone_by - 1)
+    rightmost_character_of_label_for (alphabets_gone_by - 1)
 else.
     ''
 end.
@@ -49,31 +49,31 @@ assertion =: dyad define
 
 verb define test
  test =. 'Rightmost character of column 0 is A.'
- test_character =. character_of_label_for 0
+ test_character =. rightmost_character_of_label_for 0
  test assertion (,'A') matches test_character
 )
  
 verb define test
  test =. 'Rightmost character of column 1 is B.'
- test_character =. character_of_label_for 1
+ test_character =. rightmost_character_of_label_for 1
  test assertion (,'B') matches test_character
 )
 
 verb define test
  test =. 'Rightmost character of column 26 is A.'
- test_character =. character_of_label_for 26
+ test_character =. rightmost_character_of_label_for 26
  test assertion (,'A') matches test_character
 )
 
 verb define test
  test =. 'Rightmost character of label for 701 is Z.'
- test_character =. character_of_label_for 701
+ test_character =. rightmost_character_of_label_for 701
  test assertion (,'Z') matches test_character
 )
 
 verb define test
  test =. 'Rightmost character of label for 702 is A.'
- test_character =. character_of_label_for 702
+ test_character =. rightmost_character_of_label_for 702
  test assertion (,'A') matches test_character
 )
 
