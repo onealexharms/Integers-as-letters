@@ -48,16 +48,15 @@ end.
 )
 
 needs_a_first_character =: verb define
-(y % LENGTH_OF_ALPHABET) >: <. LENGTH_OF_ALPHABET^_1
-
+y >: 0
 )
 
 needs_a_second_character =: verb define
-(y % LENGTH_OF_ALPHABET) >: LENGTH_OF_ALPHABET^1
+y >: LENGTH_OF_ALPHABET^1
 )
 
 needs_a_third_character =: verb define
-(y % LENGTH_OF_ALPHABET) >: 27 
+y >: 702 
 )
 
 third_character_of_label_for =: verb define
