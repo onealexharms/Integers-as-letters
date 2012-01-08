@@ -7,10 +7,13 @@ length_of =: #
 ascii_characters =: a.
 get_index_of =: i.
 shape_of =: $
-dimensions =: length_of @ shape_of
+dimensions =: # @ $
 box =: <
-
+unbox =: >
+box_of_nothing =: < 0 0 $ 0
 test_report =: smoutput
+
+clear_screen =: ,"(0) 100 # ' '
 
 LENGTH_OF_ALPHABET =: 26
 ASCII_FOR_A =: ascii_characters get_index_of 'A'
@@ -47,71 +50,73 @@ matches =: dyad define
 assertion =: dyad define
  name_of_test =. x
  'result describe_result' =. y
- smoutput (result from (('*FAILED ASSERTION*  ', describe_result) ,: 'success ')), x 
- smoutput '---'
-
+ failure_with_description =. ('*FAILED ASSERTION*  ', describe_result) 
+ smoutput '--- ', name_of_test, ' ---' 
+ smoutput unbox (result from (box failure_with_description), box_of_nothing)
 )
 
+smoutput clear_screen
+
 verb define test
- test =. 'Rightmost character of column 0 is A.'
+ verify =. 'Rightmost character of column 0 is A.'
  test_character =. rightmost_character_of_label_for 0
- test assertion (,'A') matches test_character
+ verify assertion (,'A') matches test_character
 )
  
 verb define test
- test =. 'Bogus testing test'
- test assertion ('A') matches ('not A')
+ verify =. 'Bogus testing test'
+ verify assertion ('A') matches ('not A')
 )
 
 verb define test
- test =. 'Rightmost character of column 1 is B.'
+ verify =. 'Rightmost character of column 1 is B.'
  test_character =. rightmost_character_of_label_for 1
- test assertion (,'B') matches test_character
+ verify assertion (,'B') matches test_character
 )
 
 verb define test
- test =. 'Rightmost character of column 26 is A.'
+ verify =. 'Rightmost character of column 26 is A.'
  test_character =. rightmost_character_of_label_for 26
- test assertion (,'A') matches test_character
+ verify assertion (,'A') matches test_character
 )
 
 verb define test
- test =. 'Rightmost character of label for 701 is Z.'
+ verify =. 'Rightmost character of label for 701 is Z.'
  test_character =. rightmost_character_of_label_for 701
- test assertion (,'Z') matches test_character
+ verify assertion (,'Z') matches test_character
 )
 
 verb define test
- test =. 'Rightmost character of label for 702 is A.'
+ verify =. 'Rightmost character of label for 702 is A.'
  test_character =. rightmost_character_of_label_for 702
- test assertion (,'A') matches test_character
+ verify assertion (,'A') matches test_character
 )
 
 verb define test
- test =. 'Character before rightmost character of label for 27 is A.'
+ verify =. 'Character before rightmost character of label for 27 is A.'
  test_character =. second_character_of_label_for 27
- test assertion (,'A') matches test_character
+ verify assertion (,'A') matches test_character
 )
 
 verb define test
- test =. 'Label for 25 is contains one letter-digit.'
- test assertion 1 matches length_of label_for 25
+ verify =. 'Label for 25 is contains one letter-digit.'
+ verify assertion 1 matches length_of label_for 25
 )
 
 verb define test
- test =. 'Character before rightmost character of label for 52 is B.'
+ verify =. 'Character before rightmost character of label for 52 is B.'
  test_character =. second_character_of_label_for 52
- test assertion (,'B') matches test_character
+ verify assertion (,'B') matches test_character
 )
 
 verb define test
- test =. 'Character before rightmost character of label for 26 is A.'
+ verify =. 'Character before rightmost character of label for 26 is A.'
  test_character =. second_character_of_label_for 26
- test assertion (,'A') matches test_character
+ verify assertion (,'A') matches test_character
 )
 
 verb define test
- test =. 'Label for 701 is ZZ.' 
- test assertion ('ZZ') matches label_for 701
+ verify =. 'Label for 701 is ZZ.' 
+ verify assertion ('ZZ') matches label_for 701
 )
 
